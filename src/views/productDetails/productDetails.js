@@ -2,17 +2,17 @@
 
 import React from "react";
 import classNames from "classnames";
-import Header from "../../components/Header"
-import Parallax from "../../components/Parallax"
-import HeaderText from "../../components/HeaderText"
-import GridContainer from "../../components/Grid/GridContainer.js";
-import GridItem from "../../components/Grid/GridItem.js";
+import Header from "components/Header"
+import Parallax from "components/Parallax"
+import HeaderText from "components/HeaderText"
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
 import { makeStyles } from "@material-ui/core/styles";
 import ProductList from "../productList/productList"
 import { flexbox } from "@material-ui/system";
 import Icon from '@mdi/react';
 import Button from '@material-ui/core/Button';
-import { mdiTabPlus } from '@mdi/js';
+import { mdiCartPlus } from '@mdi/js';
 
 const styles = {
 
@@ -57,7 +57,6 @@ function ProductDetails(props) {
     const classes = useStyles();
     // return  <h2> {productId ? `<a>Product Details h ${productId}</a>` : `${"No Product"}` } </h2> ;
    function navToAdd(productDetails){
-      console.log("PRODUCT DETAIL",productDetails);
       props.history.push( {
         pathname: `/payment/${productDetails.id}`,
         state: { detail: productDetails }
@@ -78,7 +77,7 @@ function ProductDetails(props) {
            color: "dark"
          }}
          ></Header>
-        <Parallax filter image={require("../../assets/img/landing-bg-2.jpg")}>
+        <Parallax filter image={require("assets/img/landing-bg-2.jpg")}>
         {/* <HeaderText/> */}
         </Parallax>
         <GridContainer className={classes.container}  >
@@ -100,7 +99,7 @@ function ProductDetails(props) {
                 <Button variant="contained" 
                 onClick = {() => {navToAdd(productDetails)}}
                 color="secondary" className={classes.button}>
-                <Icon path={mdiTabPlus}
+                <Icon path={mdiCartPlus}
                 title="AllSize"
                 size={1}
                 color="white"

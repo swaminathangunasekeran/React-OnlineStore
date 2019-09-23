@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import GridContainer from "./Grid/GridContainer.js";
 import GridItem from "./Grid/GridItem.js";
 // import styles from "../assets/jss/material-kit-react/components/parallaxStyle.js";
-import styles from "../assets/jss/material-kit-react/views/landingPage.js";
+import styles from "assets/jss/material-kit-react/views/landingPage.js";
 
 const useStyles = makeStyles(styles);
 

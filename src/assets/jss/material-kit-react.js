@@ -179,6 +179,12 @@ const cardSubtitle = {
   marginTop: "-.375rem"
 };
 
+const formContainer = {
+  display: 'flex',
+  flexWrap: 'wrap',
+}
+
+
 export {
   //variables
   drawerWidth,

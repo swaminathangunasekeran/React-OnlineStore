@@ -9,6 +9,7 @@
     "@mdi/js": "^4.4.95",
     "@mdi/react": "^1.2.1",
     "classnames": "^2.2.6",
+    "formik": "^1.5.8",
     "history": "^4.10.1",
     "mdi-material-ui": "^6.7.0",
     "react": "^16.9.0",
@@ -16,7 +17,8 @@
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "0.9.5",
-    "redux": "^4.0.4"
+    "redux": "^4.0.4",
+    "yup": "^0.27.0"
   },
   "devDependencies": {
     "eslint-config-standard": "^14.1.0",

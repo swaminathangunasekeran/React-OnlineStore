@@ -2,24 +2,24 @@
 
 import React from "react";
 import classNames from "classnames";
-import Header from "../../components/Header"
-import Parallax from "../../components/Parallax"
-import HeaderText from "../../components/HeaderText"
-import GridContainer from "../../components/Grid/GridContainer.js";
-import GridItem from "../../components/Grid/GridItem.js";
+import Header from "components/Header"
+import Parallax from "components/Parallax"
+import HeaderText from "components/HeaderText"
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
 import { makeStyles } from "@material-ui/core/styles";
 import ProductList from "../productList/productList"
 import { flexbox } from "@material-ui/system";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Icon from '@mdi/react';
-import Button from '@material-ui/core/Button';
+
 import { mdiTabPlus } from '@mdi/js';
 import Typography from '@material-ui/core/Typography';
 import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
-
-
+import CardForm from "./cardForm"
+import NetBanking from"./netBankingForm"
 
 const styles = {
 
@@ -54,10 +54,7 @@ const styles = {
     padding:"30px",
     maxWidth:"50%"
   },
-  formContainer:{
-    display: 'flex',
-    flexWrap: 'wrap',
-  }
+
 
 
 }
@@ -82,216 +79,35 @@ function Payment(props) {
 
 
     function ChangePaymentOption(event,text){
-      console.log("EVENT",event.target)
-      console.log("TEXT",text)
       setPaymentMethod(text)
     } 
 
-    function CreditCardForm(){
-      return (
-        <div>
-
-      
-      <p>Please fill <b> {paymentMethod} </b>Details</p>
-      <div className={classes.formContainer}>
-      <form className={classes.root} noValidate>
-      <Input
-
-        placeholder="Name"
-        className={classes.input}
-        inputProps={{
-          'aria-label': 'Name',
-        }}
-      />
-      <Input
-        placeholder="Credit Card Number"
-        className={classes.input}
-        type="number"
-        inputProps={{
-          'aria-label': 'Card Number',
-        }}
-      />
-    <TextField
-        id="date"
-        label="ExpiryDate"
-        type="date"
-        defaultValue="2017-05-24"
-        className={classes.textField}
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
-     <Input
-
-        placeholder="CVV"
-        className={classes.input}
-        type="number"
-        inputProps={{
-          'aria-label': 'CVV',
-        }}
-        />
-
-      </form>
-      <Button variant="contained" 
-                
-                color="secondary" className={classes.button}>
-                  Pay
-      </Button>
-    </div>
-      </div>
-      
-      );
+    function thankYouPage (){
+      props.history.push( {
+        pathname: `/Thankyou`,
+        state: { detail: productDetails }
+      })
     }
 
-    function DebitCardForm(){
-      return (
-        <div>
 
-      
-      <p>Please fill <b> {paymentMethod} </b>Details</p>
-      <div className={classes.formContainer}>
-      <form className={classes.root} noValidate>
-          <Input
-            placeholder="Name"
-            className={classes.input}
-            inputProps={{
-              'aria-label': 'Name',
-            }}
-          />
-          <Input
-            placeholder="Debit card Number"
-            className={classes.input}
-            type="number"
-            inputProps={{
-              'aria-label': 'Card Number',
-            }}
-          />
-          <TextField
-            id="date"
-            label="ExpiryDate"
-            type="date"
-            defaultValue="2017-05-24"
-            className={classes.textField}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          <Input
-
-            placeholder="CVV"
-            className={classes.input}
-            type="number"
-            inputProps={{
-              'aria-label': 'CVV',
-            }}
-          />
-      </form>
-      <Button variant="contained" 
-                
-                color="secondary" className={classes.button}>
-                  Pay
-      </Button>
-    </div>
-      </div>
-      
-      );
-    }
-
-    function NetBankingForm(){
-      return (
-        <div>
-          
-
-          <p>Please choose your bank</p>
-          <List >
-                {['HDFC', 'HSBC', 'ICICI', 'StaeBank'].map((text, index) => (
-                  <Button color="secondary" className={classes.button}
-                   onClick = {(event) => {ChangePaymentOption(event,text)}} 
-                    button key={text}>
-                    {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
-                    {/* <ListItemText primary={text} /> */}
-                    <Typography variant="button" >
-                    {text}
-                    </Typography>
-
-                  </Button>
-                ))}
-              </List>
-              <Button variant="contained" 
-               
-                color="secondary" className={classes.button}>
-                  Pay
-              </Button>
-        </div>
-      );
-    }
-
-    function CODForm(){
-     return (
-        <div>
-
-      
-      <p>Please fill <b> {paymentMethod} </b>Details</p>
-      <div className={classes.formContainer}>
-      <form className={classes.root} noValidate>
-      <Input
-          placeholder="Name"
-          className={classes.input}
-          inputProps={{
-            'aria-label': 'Name',
-          }}
-          />
-          
-
-          <Input
-
-          placeholder="Address"
-          className={classes.input}
-          inputProps={{
-            'aria-label': 'Name',
-          }}
-          />
-            <Input
-
-            placeholder="PinCode"
-            className={classes.input}
-            type="number"
-            inputProps={{
-              'aria-label': 'CVV',
-            }}
-/>
-          
-          
-      </form>
-      <Button variant="contained" 
-                
-                color="secondary" className={classes.button}>
-                  Submit
-              </Button>
-    </div>
-      </div>
-      
-      );
-    }
-
+ 
     function renderPaymentMethod(paymentMethod){
       switch(paymentMethod) {
         case 'CreditCard':
-            return CreditCardForm()
+            return <CardForm NavTo={thankYouPage} paymentMethod="creditCard"/>
         case 'Debit Card':
-          return  DebitCardForm()
+          return <CardForm NavTo={thankYouPage} paymentMethod="DebitCard"/>
         case "NetBanking" : 
-          return  NetBankingForm()
-        case "COD" : 
-        return  CODForm()
+          return <NetBanking/>
+        // case "COD" : 
+        // return  CODForm()
         default:
-          return CODForm()
-      }
-
-
-        
+          return <CardForm NavTo={thankYouPage} paymentMethod="creditCard"/>
+      }   
     }
    
+
+
     return (
       <div>
         {productId && 
@@ -306,7 +122,7 @@ function Payment(props) {
            color: "dark"
          }}
          ></Header>
-        <Parallax filter image={require("../../assets/img/landing-bg-3.jpg")}>
+        <Parallax filter image={require("assets/img/landing-bg-3.jpg")}>
         {/* <HeaderText/> */}
         </Parallax>
 
@@ -319,7 +135,7 @@ function Payment(props) {
                 <ul>
                 <List >
                 {['CreditCard', 'Debit Card', 'NetBanking', 'COD'].map((text, index) => (
-                  <ListItem onClick = {(event) => {ChangePaymentOption(event,text)}}  button key={text}>
+                  <ListItem onClick = {(event) => {setPaymentMethod(text)}}  button key={text}>
                     {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
                     {/* <ListItemText primary={text} /> */}
                     <Typography variant="button" >

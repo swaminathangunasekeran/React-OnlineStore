@@ -7,7 +7,9 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
+import { mdiCartPlus } from '@mdi/js';
+import Icon from '@mdi/react';
 import Redirect from "react-router-dom";
 
 const useStyles = makeStyles({
@@ -21,7 +23,7 @@ const useStyles = makeStyles({
   },
 });
 
-function MediaCard(props) {
+function ProductCard(props) {
   const classes = useStyles();
   // const [productDetails, setProductDetails] = React.useState(0);
 
@@ -65,11 +67,17 @@ function MediaCard(props) {
           </CardContent>
         </CardActionArea>
         <CardActions>
+            
           {/* <Button size="small" color="primary">
             Share
           </Button> */}
-          <Button size="small" color="primary">
-            More
+          <Button variant="contained" size="small" color="secondary">
+          <Icon path={mdiCartPlus}
+                title="AllSize"
+                size={1}
+                color="white"
+                />
+            Cart
           </Button>
         </CardActions>
       </Card>
@@ -80,5 +88,5 @@ function MediaCard(props) {
   
 
 
-export default withRouter(MediaCard);
+export default withRouter(ProductCard);
 // export default MediaCard;

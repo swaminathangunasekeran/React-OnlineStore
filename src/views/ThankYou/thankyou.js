@@ -7,6 +7,8 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import { makeStyles } from "@material-ui/core/styles";
 import ProductList from "../productList/productList"
+// import { Link } from "@material-ui/core";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
 const styles = {
@@ -26,11 +28,11 @@ const styles = {
       }
 }
 
-const useStyles = makeStyles(styles);
+const useStyles = makeStyles({});
 
-function Home() {
+function Thankyou(props) {
   const classes = useStyles();
-
+  const productDetails = props.location.state ? props.location.state.detail: "" ;
 
     return (
       <div>
@@ -48,7 +50,9 @@ function Home() {
     </Parallax>
     <GridContainer className={classes.container}  >
       <GridItem className={classes.subContainer}  xs={12} sm={12} md={6}>
-        <ProductList/>
+       <h1>Thank you</h1>
+        <p>Your order {productDetails && productDetails.title} will be delivered in 5 working days </p>
+       <Link to="home">HOME</Link>
       </GridItem> 
     </GridContainer>
 
@@ -58,4 +62,4 @@ function Home() {
     );
   }
 
-  export default Home
+  export default Thankyou

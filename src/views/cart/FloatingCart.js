@@ -12,6 +12,7 @@ const styles = {
         display:"flex",
         flexDirection:"row",
         flexWrap:"wrap"
+
     },
 
     cartCard:{
@@ -29,9 +30,11 @@ const styles = {
         overflowX: "scroll",
         border: "5px solid #3c4858",
         background: "#fff",
+        padding:"10px"
     },
     Checkoutbutton:{
-        float:"right"
+        float:"right",
+        marginRight:"20px"
     }
    
 }

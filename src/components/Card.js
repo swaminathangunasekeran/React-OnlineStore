@@ -11,6 +11,7 @@ import { withRouter } from 'react-router-dom';
 import { mdiCartPlus } from '@mdi/js';
 import Icon from '@mdi/react';
 import Redirect from "react-router-dom";
+import CartAction from "container/CartActionButton";
 
 const useStyles = makeStyles({
   card: {
@@ -26,16 +27,18 @@ const useStyles = makeStyles({
 function ProductCard(props) {
   const classes = useStyles();
   // const [productDetails, setProductDetails] = React.useState(0);
+  const prodDetails = {
+    id:props.id,
+    img:props.img,
+    title:props.title,
+    price:props.price
+ }
+ // const [productDetails, setProductDetails] = React.useState(prodDetails);
 
    function navToProdDetails (id) {
    //props.history.push(`/productDetails/${id}`)
 
-   const prodDetails = {
-      id:props.id,
-      img:props.img,
-      title:props.title,
-      price:props.price
-   }
+  
 
    props.history.push( {
     pathname: `/productDetails/${id}`,
@@ -49,8 +52,14 @@ function ProductCard(props) {
  
   
       return (
-        <Card cardid={props.id} onClick= {() => navToProdDetails(props.id) } className={classes.card}>
-        <CardActionArea>
+        <Card cardid={props.id}  className={classes.card}>
+        <CardActionArea onClick= {(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          e.nativeEvent.stopImmediatePropagation();
+        navToProdDetails(props.id)
+        }
+        }>
           <CardMedia
             className={classes.media}
             image={props.img}
@@ -66,19 +75,21 @@ function ProductCard(props) {
             </Typography>
           </CardContent>
         </CardActionArea>
+        
         <CardActions>
             
+        <CartAction product={prodDetails}/>
           {/* <Button size="small" color="primary">
             Share
           </Button> */}
-          <Button variant="contained" size="small" color="secondary">
+          {/* <Button variant="contained" size="small" color="secondary">
           <Icon path={mdiCartPlus}
                 title="AllSize"
                 size={1}
                 color="white"
                 />
             Cart
-          </Button>
+          </Button> */}
         </CardActions>
       </Card>
       )

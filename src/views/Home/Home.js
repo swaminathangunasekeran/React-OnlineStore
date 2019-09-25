@@ -7,7 +7,7 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import { makeStyles } from "@material-ui/core/styles";
 import ProductList from "../productList/productList"
-
+import FloatingCartAction from "container/FloatingCartAction";
 
 const styles = {
 
@@ -49,6 +49,7 @@ function Home() {
     <GridContainer className={classes.container}  >
       <GridItem className={classes.subContainer}  xs={12} sm={12} md={6}>
         <ProductList/>
+        <FloatingCartAction/>
       </GridItem> 
     </GridContainer>
 
